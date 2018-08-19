@@ -1,0 +1,40 @@
+.sidebar{
+    z-index: 1;
+    position: fixed;
+    height: 100%;
+    width: 18%;
+    background: #5b6577;
+    
+}
+
+.sidebar a{
+    padding: 10px 15px;
+    display: block;
+    text-decoration: none;
+    color: #eff3f6;
+}
+
+.sidebar a.active{
+    background: #495261;
+
+}
+
+.sidebar a span{
+    margin-right: 12px;
+}
+
+.sidebar header h2{
+    font-family: 'Roboto Slab', sans-serif;
+    padding: 10px 20px;
+    background: #42ddf5;
+    min-height: 68px;
+    width: 100%;
+    font-size: 28px;
+    /*text-transform: uppercase;*/
+    color: #fff;
+}
+
+.sidebar header{
+    display: flex;
+    align-items: center;
+}

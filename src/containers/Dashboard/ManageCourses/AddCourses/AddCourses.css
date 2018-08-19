@@ -1,0 +1,25 @@
+.addCourses{
+    letter-spacing: .5px;
+    background: #fff;
+    border: 1px solid #d2dfd8;
+    padding-bottom: 20px;
+    margin: 50px auto;
+    box-shadow: 2px 2px 5px rgba(198, 198, 198, 0.6);
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    border-radius: 7px;
+    width: 80%;
+    height: 100%;
+}
+
+.addCourses h1{
+    padding: 13px 35px;
+    font-size: 27px;
+    text-transform: capitalize;
+    background: #d8d8d8;
+    border-bottom: 1px solid #d2dfd8;
+}
+
+.addCourses form{
+    padding: 20px 35px;
+}

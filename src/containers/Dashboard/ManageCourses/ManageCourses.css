@@ -1,0 +1,32 @@
+/******* NAVIGATION ******/
+.manageCourses a{
+    display: inline-block;
+    padding: 10px;
+    background-color: #bcbcff;
+    color: white;
+    text-decoration:none;
+    opacity: 0.7;
+    margin-top: 15px;
+}
+
+.active{
+    background: green !important;
+    color: green;
+    opacity: 1 !important;
+}
+
+.manageCourses nav{
+    width: 30%;
+    margin: 30px auto 0px;
+}
+
+.manageCourses nav a{
+    width: 50%;
+    text-align: center;
+}
+
+.manageCourses nav span{
+    margin-right: 10px;
+    
+}
+

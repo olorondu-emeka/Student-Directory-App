@@ -1,0 +1,54 @@
+.viewbio{
+    background: #fff;
+    border: 1px solid #d2dfd8;
+    padding-bottom: 20px;
+    margin: 50px auto 70px;
+    box-shadow: 2px 2px 5px rgba(198, 198, 198, 0.6);
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    border-radius: 7px;
+    width: 90%;
+    height: 100%;
+}
+
+.viewbio h1{
+    padding: 13px 35px;
+    font-size: 27px;
+    text-transform: capitalize;
+    background: #d8d8d8;
+    border-bottom: 1px solid #d2dfd8;
+}
+
+.viewbio table{
+    width: 85%;
+    border-collapse: collapse;
+    text-align: left;
+    margin: 30px auto;
+}
+
+.viewbio .firstHeading {
+    width: 30%;
+}
+
+.viewbio .secondHeading{
+    width: 70%;
+}
+
+.viewbio thead{
+    background: #42ddf5 !important;
+    border: 1px solid #42ddf5;
+    font-size: 18px;
+}
+
+.viewbio tr:nth-child(even){
+    background: #eee;
+}
+
+.viewbio th{
+    border: 1px solid #33adbf;
+    padding: 5px 15px;
+}
+.viewbio td{
+    border: 1px solid #9a9a9a;
+    padding: 5px 12px;
+}
