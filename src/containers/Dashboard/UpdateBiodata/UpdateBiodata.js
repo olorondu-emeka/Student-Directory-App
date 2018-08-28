@@ -71,31 +71,34 @@ class UpdateBiodata extends Component{
 
     render(){
         return (
-            <div className={classes.bio}>
-                <p>{this.state.successMessage}</p>
-                <h1>Update Biodata </h1>
-                <form onSubmit={this.submitForm}>
-                    <label>Matriculation Number</label>
-                    <input type="text" value={this.state.student.credentials.matricNo} readOnly/>
-                    <label>Surname</label>
-                    <input type="text"  value={this.state.student.biodata.surname} readOnly/>
-                    <label>First Name</label>
-                    <input type="text" value={this.state.student.biodata.firstname} readOnly/>
-                    <label>Department</label>
-                    <input type="text"  defaultValue={this.state.student.credentials.course} readOnly/>
-                    <label>Level</label>
-                    <input type="text" value={this.state.student.biodata.level} readOnly/>
-                    <label>Email</label>
-                    <input type="email" name="email" defaultValue={this.state.student.biodata.email} onChange={this.handleChange}/>
-                    <label>Phone Number</label>
-                    <input type="text" name="phoneNo" defaultValue={this.state.student.biodata.phoneNo} onChange={this.handleChange}/>
-                    <label>DOB</label>
-                    <input type="text" name="dob" placeholder="DD/MM/YYYY" defaultValue={this.state.student.biodata.dob} onChange={this.handleChange}/>
-                    <label>Address</label>
-                    <textarea name="address" rows="4" defaultValue={this.state.student.biodata.address} onChange={this.handleChange}></textarea>
-                    <input type="submit" value="Update biodata" />
-                </form>
+            <div>
+                <p style={{margin: '90px 0px 0px 187px', color: 'green'}}>{this.state.successMessage}</p>
+                <div className={classes.bio}>
+                    <h1>Update Biodata </h1>
+                    <form onSubmit={this.submitForm}>
+                        <label>Matriculation Number</label>
+                        <input type="text" value={this.state.student.credentials.matricNo} readOnly/>
+                        <label>Surname</label>
+                        <input type="text"  value={this.state.student.biodata.surname} readOnly/>
+                        <label>First Name</label>
+                        <input type="text" value={this.state.student.biodata.firstname} readOnly/>
+                        <label>Department</label>
+                        <input type="text"  defaultValue={this.state.student.credentials.course} readOnly/>
+                        <label>Level</label>
+                        <input type="text" value={this.state.student.biodata.level} readOnly/>
+                        <label>Email</label>
+                        <input type="email" name="email" defaultValue={this.state.student.biodata.email} onChange={this.handleChange}/>
+                        <label>Phone Number</label>
+                        <input type="text" name="phoneNo" defaultValue={this.state.student.biodata.phoneNo} onChange={this.handleChange}/>
+                        <label>DOB</label>
+                        <input type="text" name="dob" placeholder="DD/MM/YYYY" defaultValue={this.state.student.biodata.dob} onChange={this.handleChange}/>
+                        <label>Address</label>
+                        <textarea name="address" rows="4" defaultValue={this.state.student.biodata.address} onChange={this.handleChange}></textarea>
+                        <input type="submit" value="Update biodata" />
+                    </form>
+                </div>
             </div>
+
         );
     }
 }

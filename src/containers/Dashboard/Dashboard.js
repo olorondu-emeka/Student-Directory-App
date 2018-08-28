@@ -5,31 +5,70 @@ import Sidebar from '../../components/UI/Sidebar/Sidebar';
 import ViewBiodata from './ViewBiodata/ViewBiodata';
 import UpdateBiodata from './UpdateBiodata/UpdateBiodata';
 import ManageCourses from './ManageCourses/ManageCourses';
+import DashboardIndex from './Dashboard_Index/Dashboard_index';
+import Logout from '../Logout/Logout';
 import classes from './Dashboard.css';
+import { connect } from 'react-redux';
+import TheAxios from "axios";
 
 
 class Dashboard extends Component{
     state = {
         student: {},
-        contentLoaded: false,
+        contentLoaded: false
+
     };
 
     tracker = 1;
     initialTracker = 1;
     componentUpdated = 0;
 
+    componentWillMount(){
+        const theToken = window.localStorage.getItem('token');
+        if (theToken !== null){
+            //set header
+           this.getToken(theToken);
+        }
+        else{
+            this.props.history.replace('/login');
+        }
+    }
+
+
+    getToken  (token){
+
+        if (token) {
+            TheAxios.defaults.headers.common['authorization'] = token;
+            console.log('the token', TheAxios.defaults.headers.common['authorization']);
+        } else {
+            TheAxios.defaults.headers.common['authorization'] = null;
+            console.log('the token', token);
+            /*if setting null does not remove `Authorization` header then try
+              delete axios.defaults.headers.common['Authorization'];
+            */
+        }
+    };
+
     componentDidMount(){
         console.log('dashboard component mounted');
+        // const tokenValue = window.localStorage.getItem('token');
+        // console.log(tokenValue);
+
+        //get token value from redux store and store it in the axios header
+        //this.getToken(tokenValue);
         axios.get(`/dashboard/${this.props.match.params.id}`)
             .then(result => {
                 this.componentUpdated = 0;
                 this.setState({ student: result.data.student, contentLoaded: true });
                 this.tracker = 2;
-                console.log('state set in dashboard mount', this.tracker);
+                console.log('state set in dashboard mount', result);
             })
             .catch(err => {
+                // this.props.history.replace('/login');
                 console.log(err);
             });
+
+
     }
 
      componentDidUpdate(){
@@ -41,7 +80,7 @@ class Dashboard extends Component{
                axios.get(`/dashboard/${this.props.match.params.id}`)
                    .then(result => {
                        this.setState({ student: result.data.student, contentLoaded: true });
-                       //console.log('state set in dashboard update', result.data.student);
+                       console.log(result, "dashboard component updated");
                    })
                    .catch(err => {
                        console.log(err);
@@ -58,6 +97,7 @@ class Dashboard extends Component{
         //console.log('end of dashboard component updated');
     }
 
+
     render() {
         if (this.state.contentLoaded) {
             return (
@@ -66,21 +106,21 @@ class Dashboard extends Component{
                     <div className={classes.dashboard_body}>
                         <div>
                             <header>
-                                <h1>Student Directory</h1>
+                                <h1>Student <span className={classes.dash_header}>Directory</span></h1>
                                 <p>Welcome,
                                     <span>
-                                        {this.state.student.biodata.surname} {this.state.student.biodata.firstname}
+                                         {" " + this.state.student.biodata.surname} {this.state.student.biodata.firstname}
                                     </span>
                                 </p>
-                                <p>Bachelor of Science in {this.state.student.credentials.course}</p>
+                                {/*<p>Bachelor of Science in {this.state.student.credentials.course}</p>*/}
                             </header>
-                            <div className={classes.welcome}>
 
-                            </div>
                             <Switch>
                                 <Route path={this.props.match.url + "/view-biodata"} render={() => <ViewBiodata theStudent={this.state.student} />}/>
                                 <Route path={this.props.match.url + "/update-biodata"} render={() => <UpdateBiodata theStudent={this.state.student} />}/>}/>
                                 <Route path={this.props.match.url + "/manage-courses"} component={ManageCourses} />
+                                <Route path={this.props.match.url + "/logout"} render={() => <Logout logoutUser={this.props.logout} />} />
+                                <Route path={this.props.match.url} component={DashboardIndex} />
                             </Switch>
                         </div>
                     </div>
@@ -96,4 +136,12 @@ class Dashboard extends Component{
     }
 }
 
-export default Dashboard;
+const mapDispatchToProps = dispatch => {
+    return {
+        logout: () => dispatch({type: 'LOGOUT_USER'})
+    };
+
+};
+
+
+export default connect(null, mapDispatchToProps)(Dashboard);

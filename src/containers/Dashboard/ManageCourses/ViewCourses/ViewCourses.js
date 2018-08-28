@@ -38,8 +38,8 @@ class ViewCourses extends Component{
     render(){
         var deleteHandler = this.deleteCourse;
         var theCourses = (
-            <tr>
-                <td>No course has been registered</td>
+            <tr style={{width: '100%', textAlign: 'center'}} >
+                <td colspan="5">No course has been registered</td>
             </tr>
         );
 
@@ -65,7 +65,7 @@ class ViewCourses extends Component{
 
             <div className={classes.viewcourses}>
                 <h1>Registered Courses</h1>
-                <p>{this.state.successMessage}</p>
+                <p style={{color: 'green', paddingLeft: '32px'}}>{this.state.successMessage}</p>
                 <div>
                     <table>
                         <thead>

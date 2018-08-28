@@ -40,20 +40,20 @@ class AddCourses extends Component{
 
     render(){
         return (
-            <div className={classes.addCourses}>
-                <p>{this.state.successMessage}</p>
-
-                <h1>Add courses</h1>
-
-                <form onSubmit={this.submitForm}>
-                    <label>Course Title</label>
-                    <input type="text" name="courseTitle" defaultValue="" onChange={this.handleChange}/>
-                    <label>Course Code</label>
-                    <input type="text" name="courseCode" onChange={this.handleChange}/>
-                    <label>Course Unit</label>
-                    <input type="number" name="courseUnit" min="1" max="10" onChange={this.handleChange}/>
-                    <input type="submit" value="Add Course"/>
-                </form>
+            <div>
+                <p style={{margin: '10px 0px 0px 110px', color: 'green'}}>{this.state.successMessage}</p>
+                <div className={classes.addCourses}>
+                    <h1>Add courses</h1>
+                    <form onSubmit={this.submitForm}>
+                        <label>Course Title</label>
+                        <input type="text" name="courseTitle" defaultValue="" onChange={this.handleChange}/>
+                        <label>Course Code</label>
+                        <input type="text" name="courseCode" onChange={this.handleChange}/>
+                        <label>Course Unit</label>
+                        <input type="number" name="courseUnit" min="1" max="10" onChange={this.handleChange}/>
+                        <input type="submit" value="Add Course"/>
+                    </form>
+                </div>
             </div>
         );
     }

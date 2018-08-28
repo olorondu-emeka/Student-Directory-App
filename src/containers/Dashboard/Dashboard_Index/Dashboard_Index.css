@@ -1,0 +1,46 @@
+.dashindex{
+    margin: 100px auto 0px;
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+}
+
+.dashindex a{
+    font-size: 18px;
+    text-decoration: none;
+    color: #222;
+    transition: 0.3s all ease;
+}
+
+.dashindex a:hover{
+    background: #37b7cb;
+}
+
+.dashindex a:hover svg{
+    color: #fff;
+}
+
+.dashindex svg{
+    margin: 15px auto;
+    color: #37b7cb;
+}
+
+.firstRow, .secondRow{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 18px;
+}
+
+.firstRow a, .secondRow a{
+    background: #fff;
+    width: 32%;
+    padding: 15px 10px 30px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    box-shadow: 2px 2px 5px rgba(198, 198, 198, 0.6);
+}
+
+.secondRow a{
+    width: 49%;
+}

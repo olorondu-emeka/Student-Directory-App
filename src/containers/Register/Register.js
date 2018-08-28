@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import axios from '../../axios-instance';
 import classes from './Register.css';
+import Header from '../../components/UI/Header/Header';
 
 class Register extends Component{
     state = {
@@ -44,28 +45,32 @@ class Register extends Component{
 
     render(){
         return (
-            <div className={classes.register}>
-                <h1>Register</h1>
-                <form onSubmit={this.submitForm}>
-                    <label>Surname</label>
-                    <input type="text" name="surname" onChange={this.handleChange}/>
-                    <label>First name</label>
-                    <input type="text" name="firstname" onChange={this.handleChange}/>
-                    <label>Level</label>
-                    <input type="number" name="level" min="100" max="500"  step="100" onChange={this.handleChange}/>
-                    <label>Matric No</label>
-                    <input type="text" name="matricNo" onChange={this.handleChange}/>
-                    <label>Course</label>
-                    <input type="text" name="course" onChange={this.handleChange}/>
-                    <label>Password</label>
-                    <input type="password" name="password" onChange={this.handleChange}/>
-                    <input type="submit" value="submit" />
-                </form>
-                <p>Already a member?
-                    <span>
+            <div>
+                <Header/>
+                <div className={classes.register}>
+                    <h1>Register</h1>
+                    <form onSubmit={this.submitForm}>
+                        <label>Surname</label>
+                        <input type="text" name="surname" onChange={this.handleChange}/>
+                        <label>First name</label>
+                        <input type="text" name="firstname" onChange={this.handleChange}/>
+                        <label>Level</label>
+                        <input type="number" name="level" min="100" max="500"  step="100" onChange={this.handleChange}/>
+                        <label>Matric No</label>
+                        <input type="text" name="matricNo" onChange={this.handleChange}/>
+                        <label>Course</label>
+                        <input type="text" name="course" onChange={this.handleChange}/>
+                        <label>Password</label>
+                        <input type="password" name="password" onChange={this.handleChange}/>
+                        <input type="submit" value="submit" />
+                    </form>
+                    <p>Already a member?
+                        <span>
                         <NavLink to="/login"> Log In</NavLink>
                     </span>
-                </p>
+                    </p>
+                </div>
+
             </div>
         );
     }

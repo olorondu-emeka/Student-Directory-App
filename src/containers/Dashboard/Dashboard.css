@@ -5,13 +5,33 @@
     flex-direction: row;
 }
 
-.dashboard header h1{
+.dashboard_body header{
     position: fixed;
     width: 100%;
-    z-index: 5;
     padding: 10px 20px;
+    z-index: 5;
+    top: 0;
+    display: flex;
     background: #fff;
     box-shadow: 0px 1px 3px rgba(198, 198, 198, 0.6);
+    justify-content: space-between;
+}
+
+.dashboard header h1{
+    width: 30%;
+    font-family: 'Pacifico', cursive;
+    font-size: 32px !important;
+    color: #2a8d9c;
+    font-weight: normal !important;
+    position: relative;
+    top: -5px;
+}
+
+.dash_header{
+    color: #b6b6b6;
+    font-size: 32px !important;
+    text-transform: capitalize !important;
+    font-weight: normal !important;
 }
 
 .dashboard_body{
@@ -26,15 +46,17 @@
 }
 
 .dashboard_body p{
-    text-align: right;
     padding-right: 20px;
-    font-size: 14px;
+    font-size: 18px;
+    width: 48%;
+    position: relative;
+    top: 12px;
 }
 
 .dashboard_body span{
     font-weight: 600;
     text-transform: uppercase;
-    font-size: 17px;
+    font-size: 20px;
 
 }
 

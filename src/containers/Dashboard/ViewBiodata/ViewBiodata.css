@@ -2,7 +2,7 @@
     background: #fff;
     border: 1px solid #d2dfd8;
     padding-bottom: 20px;
-    margin: 50px auto 70px;
+    margin: 110px auto 70px;
     box-shadow: 2px 2px 5px rgba(198, 198, 198, 0.6);
     -webkit-border-radius: 7px;
     -moz-border-radius: 7px;
@@ -35,8 +35,8 @@
 }
 
 .viewbio thead{
-    background: #42ddf5 !important;
-    border: 1px solid #42ddf5;
+    background: #37b7cb !important;
+    border: 1px solid #1b5b65;
     font-size: 18px;
 }
 

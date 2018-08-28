@@ -52,7 +52,7 @@
 }
 
 .viewcourses thead{
-    background: #42ddf5 !important;
+    background: #37b7cb !important;
     font-size: 17px;
 }
 
@@ -61,7 +61,7 @@
 }
 
 .viewcourses th{
-    border: 1px solid #33adbf;
+    border: 1px solid #257e8b;
     padding: 10px 15px;
 }
 .viewcourses td{

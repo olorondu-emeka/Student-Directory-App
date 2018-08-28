@@ -19,7 +19,7 @@ input[type="text"]:focus, textarea:focus, input[type="email"]:focus, input[type=
 
 input[type="submit"]{
     cursor: pointer;
-    background: #42ddf5;
+    background: #37b7cb;
     border: none;
     color: #222;
     font-weight: bold;
@@ -37,7 +37,7 @@ input[readonly]{
     width: 67%;
     background: #fff;
     border: 1px solid #d2dfd8;
-    margin: 50px auto 70px;
+    margin: 40px auto 70px;
     box-shadow: 2px 2px 5px rgba(198, 198, 198, 0.6);
     -webkit-border-radius: 7px;
     -moz-border-radius: 7px;

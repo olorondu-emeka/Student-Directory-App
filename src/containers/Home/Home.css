@@ -1,9 +1,10 @@
 .Home{
     /*background-image: linear-gradient(to right, #b8cbb8 0%, #b8cbb8 0%, #b465da 0%, #cf6cc9 33%, #ee609c 66%, #ee609c 100%);*/
     /*background-image: linear-gradient(to top, #b224ef 0%, #7579ff 100%);*/
-    background-image: linear-gradient(-225deg, #3D4E81 0%, #5753C9 48%, #6E7FF3 100%);
-    height: 100%;
+
+    height: 100vh;
     overflow: hidden;
+
 }
 
 .welcome{
@@ -12,8 +13,10 @@
 
 .container{
     display: flex;
-    width: 95%;
-    margin: 40px auto 57px;
+    width: 100%;
+    height: 100%;
+    /*margin: 40px auto 57px;*/
+    /*background-image: linear-gradient(-225deg, #3D4E81 0%, #5753C9 48%, #6E7FF3 100%);*/
 }
 
 .sub{
@@ -23,7 +26,7 @@
 
 .text_contain{
     width: 40%;
-    margin: 20px;
+    margin: 40px;
 }
 
 .imageContain{
@@ -34,5 +37,6 @@
 .imageContain img{
     max-width: 100%;
     background: transparent;
+    margin-top: 40px;
 }
 
