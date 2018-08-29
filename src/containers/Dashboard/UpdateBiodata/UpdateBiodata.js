@@ -2,11 +2,12 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom';
 import classes from './UpdateBiodata.css';
 import axios from "../../../axios-instance";
+import { connect } from 'react-redux';
 
 class UpdateBiodata extends Component{
 
     state = {
-        student: this.props.theStudent,
+
         formInfo: {
             email: '',
             phoneNo: '',
@@ -17,12 +18,11 @@ class UpdateBiodata extends Component{
     };
 
     componentDidMount(){
-        console.log('UPDATE biodata component mounted', this.state.student.biodata.surname);
         var theForm = {
-            email: this.state.student.biodata.email,
-            phoneNo: this.state.student.biodata.phoneNo,
-            address: this.state.student.biodata.address,
-            dob: this.state.student.biodata.dob
+            email: this.props.student.biodata.email,
+            phoneNo: this.props.student.biodata.phoneNo,
+            address: this.props.student.biodata.address,
+            dob: this.props.student.biodata.dob
         };
         this.setState({ formInfo: theForm});
     }
@@ -65,9 +65,6 @@ class UpdateBiodata extends Component{
     //         });
     // }
 
-    componentDidUpdate(){
-        console.log('Update biodata component updated');
-    }
 
     render(){
         return (
@@ -77,23 +74,23 @@ class UpdateBiodata extends Component{
                     <h1>Update Biodata </h1>
                     <form onSubmit={this.submitForm}>
                         <label>Matriculation Number</label>
-                        <input type="text" value={this.state.student.credentials.matricNo} readOnly/>
+                        <input type="text" value={this.props.student.credentials.matricNo} readOnly/>
                         <label>Surname</label>
-                        <input type="text"  value={this.state.student.biodata.surname} readOnly/>
+                        <input type="text"  value={this.props.student.biodata.surname} readOnly/>
                         <label>First Name</label>
-                        <input type="text" value={this.state.student.biodata.firstname} readOnly/>
+                        <input type="text" value={this.props.student.biodata.firstname} readOnly/>
                         <label>Department</label>
-                        <input type="text"  defaultValue={this.state.student.credentials.course} readOnly/>
+                        <input type="text"  defaultValue={this.props.student.credentials.course} readOnly/>
                         <label>Level</label>
-                        <input type="text" value={this.state.student.biodata.level} readOnly/>
+                        <input type="text" value={this.props.student.biodata.level} readOnly/>
                         <label>Email</label>
-                        <input type="email" name="email" defaultValue={this.state.student.biodata.email} onChange={this.handleChange}/>
+                        <input type="email" name="email" defaultValue={this.props.student.biodata.email} onChange={this.handleChange}/>
                         <label>Phone Number</label>
-                        <input type="text" name="phoneNo" defaultValue={this.state.student.biodata.phoneNo} onChange={this.handleChange}/>
+                        <input type="text" name="phoneNo" defaultValue={this.props.student.biodata.phoneNo} onChange={this.handleChange}/>
                         <label>DOB</label>
-                        <input type="text" name="dob" placeholder="DD/MM/YYYY" defaultValue={this.state.student.biodata.dob} onChange={this.handleChange}/>
+                        <input type="text" name="dob" placeholder="DD/MM/YYYY" defaultValue={this.props.student.biodata.dob} onChange={this.handleChange}/>
                         <label>Address</label>
-                        <textarea name="address" rows="4" defaultValue={this.state.student.biodata.address} onChange={this.handleChange}></textarea>
+                        <textarea name="address" rows="4" defaultValue={this.props.student.biodata.address} onChange={this.handleChange}></textarea>
                         <input type="submit" value="Update biodata" />
                     </form>
                 </div>
@@ -103,4 +100,10 @@ class UpdateBiodata extends Component{
     }
 }
 
-export default withRouter(UpdateBiodata);
+const mapStateToProps = state => {
+    return {
+        student: state.student
+    };
+};
+
+export default connect(mapStateToProps)(withRouter(UpdateBiodata));

@@ -72,7 +72,7 @@ class ManageCourses extends Component{
                         </NavLink>
                     </nav>
                     <Route path={this.props.match.url + "/add-courses"}  component={AddCourses} />
-                    <Route path={this.props.match.url} exact render={() => <ViewCourses theCourses={this.state.courses}/>} />
+                    <Route path={this.props.match.url} exact component={ViewCourses} />
                 </div>
             );
         }

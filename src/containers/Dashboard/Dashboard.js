@@ -10,13 +10,12 @@ import Logout from '../Logout/Logout';
 import classes from './Dashboard.css';
 import { connect } from 'react-redux';
 import TheAxios from "axios";
+import * as theAction from '../../store/actions';
 
 
 class Dashboard extends Component{
     state = {
-        student: {},
         contentLoaded: false
-
     };
 
     tracker = 1;
@@ -59,12 +58,15 @@ class Dashboard extends Component{
         axios.get(`/dashboard/${this.props.match.params.id}`)
             .then(result => {
                 this.componentUpdated = 0;
-                this.setState({ student: result.data.student, contentLoaded: true });
+
+                //update student in the redux store
+                this.props.updateStudent(result.data.student);
+
+                this.setState({ contentLoaded: true });
                 this.tracker = 2;
                 console.log('state set in dashboard mount', result);
             })
             .catch(err => {
-                // this.props.history.replace('/login');
                 console.log(err);
             });
 
@@ -74,20 +76,22 @@ class Dashboard extends Component{
      componentDidUpdate(){
 
         this.componentUpdated += 1;
-         //console.log('dashboard component updated', this.componentUpdated);
+         console.log('dashboard component updated', this.componentUpdated);
         if((this.tracker > 1) && (this.initialTracker > 1)){
            if(this.componentUpdated < 2){
                axios.get(`/dashboard/${this.props.match.params.id}`)
                    .then(result => {
-                       this.setState({ student: result.data.student, contentLoaded: true });
-                       console.log(result, "dashboard component updated");
+                       //update student in the redux store
+                       this.props.updateStudent(result.data.student);
+
+                       console.log(result, "dashboard component updated get");
                    })
                    .catch(err => {
                        console.log(err);
                    });
            }
 
-           if (this.componentUpdated === 2){
+           if (this.componentUpdated === 3){
                this.componentUpdated = 0;
            }
         }//end outer if
@@ -109,15 +113,15 @@ class Dashboard extends Component{
                                 <h1>Student <span className={classes.dash_header}>Directory</span></h1>
                                 <p>Welcome,
                                     <span>
-                                         {" " + this.state.student.biodata.surname} {this.state.student.biodata.firstname}
+                                         {" " + this.props.student.biodata.surname} {this.props.student.biodata.firstname}
                                     </span>
                                 </p>
                                 {/*<p>Bachelor of Science in {this.state.student.credentials.course}</p>*/}
                             </header>
 
                             <Switch>
-                                <Route path={this.props.match.url + "/view-biodata"} render={() => <ViewBiodata theStudent={this.state.student} />}/>
-                                <Route path={this.props.match.url + "/update-biodata"} render={() => <UpdateBiodata theStudent={this.state.student} />}/>}/>
+                                <Route path={this.props.match.url + "/view-biodata"} component={ViewBiodata} />
+                                <Route path={this.props.match.url + "/update-biodata"} component={UpdateBiodata } />
                                 <Route path={this.props.match.url + "/manage-courses"} component={ManageCourses} />
                                 <Route path={this.props.match.url + "/logout"} render={() => <Logout logoutUser={this.props.logout} />} />
                                 <Route path={this.props.match.url} component={DashboardIndex} />
@@ -136,12 +140,20 @@ class Dashboard extends Component{
     }
 }
 
+const mapStateToProps = state => {
+    return {
+        student: state.student
+    };
+};
+
+
 const mapDispatchToProps = dispatch => {
     return {
-        logout: () => dispatch({type: 'LOGOUT_USER'})
+        logout: () => dispatch(theAction.logoutUser()),
+        updateStudent: (theStudent) => dispatch(theAction.updateStudent(theStudent))
     };
 
 };
 
 
-export default connect(null, mapDispatchToProps)(Dashboard);
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

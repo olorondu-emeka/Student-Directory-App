@@ -2,31 +2,38 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import axios from '../../../../axios-instance';
 import classes from './ViewCourses.css';
+import { connect } from 'react-redux';
 
 class ViewCourses extends Component{
     state = {
-        courses: this.props.theCourses,
+        courses: this.props.courses,
         successMessage: ''
     };
 
-    componentWillReceiveProps(nextProps){
-        if(this.props.theCourses !== nextProps.theCourses){
-            console.log('component received props');
-            this.setState({
-                courses: nextProps.theCourses
-            });
 
-        }
-    }
+    //to handle real time props change
+    // componentWillReceiveProps(nextProps){
+    //     if(this.props.courses !== nextProps.courses){
+    //         console.log('component received props', nextProps.courses);
+    //         this.setState({
+    //             courses: nextProps.courses
+    //         });
+    //
+    //     }
+    // }
 
     deleteCourse = (event, theID) => {
         axios.delete(`${this.props.match.url}?course_id=${theID}`)
             .then(result => {
+                //set up real time data of course deletion
+                //to make up for the discrepancy in the
+                //dashboard component updation algorithm
                 this.setState({
-                    courses: result.data.updatedCourses,
-                    successMessage: result.data.message
+                    successMessage: result.data.message,
+                    courses: result.data.updatedCourses
                 });
-                this.props.history.replace(`${this.props.match.url}`);
+                this.props.history.push(`${this.props.match.url}`);
+
             })
             .catch(err => {
                 console.log(err);
@@ -39,7 +46,7 @@ class ViewCourses extends Component{
         var deleteHandler = this.deleteCourse;
         var theCourses = (
             <tr style={{width: '100%', textAlign: 'center'}} >
-                <td colspan="5">No course has been registered</td>
+                <td colSpan="5">No course has been registered</td>
             </tr>
         );
 
@@ -87,4 +94,10 @@ class ViewCourses extends Component{
     }
 }
 
-export default withRouter(ViewCourses);
+const mapStateToProps = state => {
+  return {
+      courses: state.student.courses
+  };
+};
+
+export default connect(mapStateToProps)(withRouter(ViewCourses));
