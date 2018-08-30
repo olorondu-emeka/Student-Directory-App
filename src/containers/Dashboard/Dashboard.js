@@ -10,7 +10,7 @@ import Logout from '../Logout/Logout';
 import classes from './Dashboard.css';
 import { connect } from 'react-redux';
 import TheAxios from "axios";
-import * as theAction from '../../store/actions';
+import  * as  theAction from '../../store/actions/index';
 
 
 class Dashboard extends Component{

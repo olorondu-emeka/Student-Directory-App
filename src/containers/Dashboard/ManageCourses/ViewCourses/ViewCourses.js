@@ -7,7 +7,8 @@ import { connect } from 'react-redux';
 class ViewCourses extends Component{
     state = {
         courses: this.props.courses,
-        successMessage: ''
+        successMessage: '',
+        loading: false
     };
 
 
@@ -23,6 +24,7 @@ class ViewCourses extends Component{
     // }
 
     deleteCourse = (event, theID) => {
+        this.setState({loading: true});
         axios.delete(`${this.props.match.url}?course_id=${theID}`)
             .then(result => {
                 //set up real time data of course deletion
@@ -30,7 +32,8 @@ class ViewCourses extends Component{
                 //dashboard component updation algorithm
                 this.setState({
                     successMessage: result.data.message,
-                    courses: result.data.updatedCourses
+                    courses: result.data.updatedCourses,
+                    loading: false
                 });
                 this.props.history.push(`${this.props.match.url}`);
 
@@ -68,14 +71,21 @@ class ViewCourses extends Component{
             });
         }
 
-        return (
+        //components to be rendered
+        if (this.state.loading) {
+            return (
+                <p>Loading...</p>
+            );
+        }
+        else{
+            return (
 
-            <div className={classes.viewcourses}>
-                <h1>Registered Courses</h1>
-                <p style={{color: 'green', paddingLeft: '32px'}}>{this.state.successMessage}</p>
-                <div>
-                    <table>
-                        <thead>
+                <div className={classes.viewcourses}>
+                    <h1>Registered Courses</h1>
+                    <p style={{color: 'green', paddingLeft: '32px'}}>{this.state.successMessage}</p>
+                    <div>
+                        <table>
+                            <thead>
                             <tr>
                                 <th className={classes.heading1}>S/N</th>
                                 <th className={classes.heading2}>Course Title</th>
@@ -83,14 +93,18 @@ class ViewCourses extends Component{
                                 <th className={classes.heading4}>Course Unit</th>
                                 <th className={classes.heading5}>Action</th>
                             </tr>
-                        </thead>
-                        <tbody>
-                        {theCourses}
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                            {theCourses}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-            </div>
-        );
+            );
+        }
+
+
+
     }
 }
 

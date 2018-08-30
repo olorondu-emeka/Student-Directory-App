@@ -5,6 +5,7 @@ import TheAxios from 'axios';
 import { NavLink } from "react-router-dom";
 import Header from '../../components/UI/Header/Header';
 import { connect } from 'react-redux';
+import * as theActions from '../../store/actions/index';
 
 
 
@@ -109,7 +110,7 @@ const mapStateToProps = state => {
 };
 const mapDispatchToProps = dispatch => {
     return {
-        loginUser: (aToken) => dispatch({type: 'LOGIN_USER', token: aToken })
+        loginUser: (aToken) => dispatch(theActions.loginUser(aToken))
     };
 };
 

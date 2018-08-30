@@ -9,7 +9,8 @@ class AddCourses extends Component{
             courseCode: '',
             courseUnit: 0
         },
-        successMessage: ''
+        successMessage: '',
+        loading: false
     };
 
     componentDidMount(){
@@ -34,6 +35,7 @@ class AddCourses extends Component{
 
     submitForm = (event) => {
         event.preventDefault();
+        this.setState({loading: true});
         var formInfo = this.state.formInfo;
         var emptyForm = {
             courseTitle: '',
@@ -43,7 +45,7 @@ class AddCourses extends Component{
         //console.log(this.props);
         axios.post(`${this.props.match.url}`, formInfo)
             .then(result => {
-                this.setState({ successMessage: result.data.message, formInfo: {...emptyForm} });
+                this.setState({ successMessage: result.data.message, formInfo: {...emptyForm}, loading: false });
                 this.props.history.push(`${this.props.match.url}`);
             })
             .catch(err => {
@@ -52,23 +54,29 @@ class AddCourses extends Component{
     };
 
     render(){
-        return (
-            <div>
-                <p style={{margin: '10px 0px 0px 110px', color: 'green'}}>{this.state.successMessage}</p>
-                <div className={classes.addCourses}>
-                    <h1>Add courses</h1>
-                    <form onSubmit={this.submitForm}>
-                        <label>Course Title</label>
-                        <input type="text" name="courseTitle" value={this.state.formInfo.courseTitle} onChange={this.handleChange}/>
-                        <label>Course Code</label>
-                        <input type="text" name="courseCode" value={this.state.formInfo.courseCode} onChange={this.handleChange}/>
-                        <label>Course Unit</label>
-                        <input type="number" name="courseUnit" value={this.state.formInfo.courseUnit} min="1" max="10" onChange={this.handleChange}/>
-                        <input type="submit" value="Add Course"/>
-                    </form>
+        if (this.state.loading){
+            return <p>Loading</p>;
+        }
+        else{
+            return (
+                <div>
+                    <p style={{margin: '10px 0px 0px 110px', color: 'green'}}>{this.state.successMessage}</p>
+                    <div className={classes.addCourses}>
+                        <h1>Add courses</h1>
+                        <form onSubmit={this.submitForm}>
+                            <label>Course Title</label>
+                            <input type="text" name="courseTitle" value={this.state.formInfo.courseTitle} onChange={this.handleChange}/>
+                            <label>Course Code</label>
+                            <input type="text" name="courseCode" value={this.state.formInfo.courseCode} onChange={this.handleChange}/>
+                            <label>Course Unit</label>
+                            <input type="number" name="courseUnit" value={this.state.formInfo.courseUnit} min="1" max="10" onChange={this.handleChange}/>
+                            <input type="submit" value="Add Course"/>
+                        </form>
+                    </div>
                 </div>
-            </div>
-        );
+            );
+        }
+
     }
 }
 

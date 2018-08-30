@@ -1,20 +1,21 @@
+import * as actionTypes from './actionTypes';
 
 export const loginUser = (theToken) => {
     return {
-        type: 'LOGIN_USER',
+        type: actionTypes.LOGIN_USER,
         token: theToken
     };
 };
 
 export const logoutUser = () => {
     return {
-        type: 'LOGOUT_USER'
+        type: actionTypes.LOGOUT_USER
     };
 };
 
 export const updateStudent = (theStudent) => {
     return {
-        type: 'UPDATE_STUDENT',
+        type: actionTypes.UPDATE_STUDENT,
         updatedStudent: theStudent
     };
 };

@@ -1,4 +1,4 @@
-
+import * as actionTypes from './actions/actionTypes';
 
 const initialState = {
     student: {},
@@ -7,17 +7,19 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
-        case 'LOGIN_USER':
+        case actionTypes.LOGIN_USER:
             return {
                 ...state,
                 token: action.token
             };
-        case 'LOGOUT_USER':
+
+        case actionTypes.LOGOUT_USER:
             return {
                 ...state,
                 token: null
             };
-        case 'UPDATE_STUDENT':
+
+        case actionTypes.UPDATE_STUDENT:
             return {
                 ...state,
                 student: {
