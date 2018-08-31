@@ -4,9 +4,6 @@ import axios from "../../axios-instance";
 import TheAxios from 'axios';
 import { NavLink } from "react-router-dom";
 import Header from '../../components/UI/Header/Header';
-import { connect } from 'react-redux';
-import * as theActions from '../../store/actions/index';
-
 
 
 class Login extends Component{
@@ -15,8 +12,6 @@ class Login extends Component{
             matricNo: '',
             password: ''
         },
-        student: {},
-        token: 'hiii',
         errorMessage: ''
     };
 
@@ -50,20 +45,15 @@ class Login extends Component{
         axios.post('/login', formInfo)
             .then(result => {
                 if (result.data.authorized){
-                    this.setState({ student: result.data.user, token: result.data.token });
 
-                    //dispatch LOGIN_USER action to store
-                    this.props.loginUser(this.state.token);
-                    var token = this.props.theToken;
-
-                    //get token value from redux store and store it in the axios header
-                    this.getToken(token);
+                    //get token value from result.data.token store and store it in the axios header
+                    this.getToken(result.data.token);
 
                     //store in local storage
-                    window.localStorage.setItem('token', this.state.token);
+                    window.localStorage.setItem('token', result.data.token);
 
                     //redirect to dashboard
-                    this.props.history.replace(`/dashboard/${this.state.student._id}`);
+                    this.props.history.replace(`/dashboard/${result.data.user._id}`);
                     console.log(result.data, "redirected to dashboard");
                 }
                 else{
@@ -103,15 +93,5 @@ class Login extends Component{
     }
 }
 
-const mapStateToProps = state => {
-    return {
-        theToken : state.token
-    };
-};
-const mapDispatchToProps = dispatch => {
-    return {
-        loginUser: (aToken) => dispatch(theActions.loginUser(aToken))
-    };
-};
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default Login;

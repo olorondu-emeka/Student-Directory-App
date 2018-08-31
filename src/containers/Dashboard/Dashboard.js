@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
-import axios from '../../axios-instance';
 import Sidebar from '../../components/UI/Sidebar/Sidebar';
 import ViewBiodata from './ViewBiodata/ViewBiodata';
 import UpdateBiodata from './UpdateBiodata/UpdateBiodata';
@@ -14,27 +13,28 @@ import  * as  theAction from '../../store/actions/index';
 
 
 class Dashboard extends Component{
-    state = {
-        contentLoaded: false
-    };
-
-    tracker = 1;
-    initialTracker = 1;
-    componentUpdated = 0;
 
     componentWillMount(){
         const theToken = window.localStorage.getItem('token');
         if (theToken !== null){
             //set header
            this.getToken(theToken);
+            //this.props.updateTheStudent(`/dashboard/${this.props.match.params.id}`);
+
         }
         else{
             this.props.history.replace('/login');
         }
     }
 
+    // componentWillReceiveProps(nextProps){
+    //     if (this.props.student !== nextProps.student){
+    //         this.setState({student: nextProps.student});
+    //     }
+    // }
 
-    getToken  (token){
+
+    getToken  (token) {
 
         if (token) {
             TheAxios.defaults.headers.common['authorization'] = token;
@@ -48,62 +48,14 @@ class Dashboard extends Component{
         }
     };
 
+
+
     componentDidMount(){
-        console.log('dashboard component mounted');
-        // const tokenValue = window.localStorage.getItem('token');
-        // console.log(tokenValue);
-
-        //get token value from redux store and store it in the axios header
-        //this.getToken(tokenValue);
-        axios.get(`/dashboard/${this.props.match.params.id}`)
-            .then(result => {
-                this.componentUpdated = 0;
-
-                //update student in the redux store
-                this.props.updateStudent(result.data.student);
-
-                this.setState({ contentLoaded: true });
-                this.tracker = 2;
-                console.log('state set in dashboard mount', result);
-            })
-            .catch(err => {
-                console.log(err);
-            });
-
-
+        this.props.updateTheStudent(`/dashboard/${this.props.match.params.id}`);
     }
-
-     componentDidUpdate(){
-
-        this.componentUpdated += 1;
-         console.log('dashboard component updated', this.componentUpdated);
-        if((this.tracker > 1) && (this.initialTracker > 1)){
-           if(this.componentUpdated < 2){
-               axios.get(`/dashboard/${this.props.match.params.id}`)
-                   .then(result => {
-                       //update student in the redux store
-                       this.props.updateStudent(result.data.student);
-
-                       console.log(result, "dashboard component updated get");
-                   })
-                   .catch(err => {
-                       console.log(err);
-                   });
-           }
-
-           if (this.componentUpdated === 3){
-               this.componentUpdated = 0;
-           }
-        }//end outer if
-
-        this.initialTracker = 2;
-
-        //console.log('end of dashboard component updated');
-    }
-
 
     render() {
-        if (this.state.contentLoaded) {
+        if (this.props.contentLoaded) {
             return (
                 <div className={classes.dashboard}>
                     <Sidebar />
@@ -123,7 +75,7 @@ class Dashboard extends Component{
                                 <Route path={this.props.match.url + "/view-biodata"} component={ViewBiodata} />
                                 <Route path={this.props.match.url + "/update-biodata"} component={UpdateBiodata } />
                                 <Route path={this.props.match.url + "/manage-courses"} component={ManageCourses} />
-                                <Route path={this.props.match.url + "/logout"} render={() => <Logout logoutUser={this.props.logout} />} />
+                                <Route path={this.props.match.url + "/logout"} component={Logout} />
                                 <Route path={this.props.match.url} component={DashboardIndex} />
                             </Switch>
                         </div>
@@ -142,15 +94,16 @@ class Dashboard extends Component{
 
 const mapStateToProps = state => {
     return {
-        student: state.student
+        student: state.student,
+        contentLoaded: state.dashboardLoaded
     };
 };
 
 
 const mapDispatchToProps = dispatch => {
     return {
-        logout: () => dispatch(theAction.logoutUser()),
-        updateStudent: (theStudent) => dispatch(theAction.updateStudent(theStudent))
+        updateTheStudent: (route) => dispatch(theAction.updateTheStudent(route))
+
     };
 
 };

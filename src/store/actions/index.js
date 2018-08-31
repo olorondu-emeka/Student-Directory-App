@@ -1,1 +1,1 @@
-export { loginUser, logoutUser, updateStudent } from './actions'
+export {updateTheStudent, updateBiodata } from './actions'

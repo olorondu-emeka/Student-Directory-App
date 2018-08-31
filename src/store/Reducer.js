@@ -2,22 +2,12 @@ import * as actionTypes from './actions/actionTypes';
 
 const initialState = {
     student: {},
-    token: 'yes'
+    token: 'yes',
+    dashboardLoaded: false
 };
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
-        case actionTypes.LOGIN_USER:
-            return {
-                ...state,
-                token: action.token
-            };
-
-        case actionTypes.LOGOUT_USER:
-            return {
-                ...state,
-                token: null
-            };
 
         case actionTypes.UPDATE_STUDENT:
             return {
@@ -25,9 +15,21 @@ const reducer = (state = initialState, action) => {
                 student: {
                     ...state.student,
                     ...action.updatedStudent
-                }
+                },
+                dashboardLoaded: action.dashboardLoaded
             };
 
+        case actionTypes.UPDATE_BIODATA:
+            return {
+                ...state,
+                student: {
+                    ...state.student,
+                    biodata: {
+                        ...state.student.biodata,
+                        ...action.newBiodata
+                    }
+                }
+            };
 
         default:
             return state;
