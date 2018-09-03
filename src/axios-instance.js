@@ -3,7 +3,7 @@ import axios from 'axios';
 
 //create an axios instance
 const instance = axios.create({
-    baseURL: 'http://192.168.8.104:8000/api/student'
+    baseURL: 'http://127.0.0.1:8000/api/student'
 });
 
 

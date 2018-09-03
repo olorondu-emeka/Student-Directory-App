@@ -77,33 +77,32 @@ class Login extends Component{
     };
 
     render(){
-       if (this.state.loading){
-           return <Spinner/>
-       }
-       else{
-           return (
-               <div>
-                   <Header/>
-                   <div className={classes.login}>
-                       <h1>Login</h1>
-                       <p className={classes.errMsg}>{this.state.errorMessage}</p>
-                       <form onSubmit={this.submitForm}>
-                           <label>Matric no</label>
-                           <input type="text" name="matricNo" onChange={this.handleChange} required/>
-                           <label>Password</label>
-                           <input type="password" name="password" onChange={this.handleChange} required/>
-                           <input type="submit" value="submit" />
-                       </form>
-                       <p>Not yet a member?
-                           <span>
+        var errorMessage = <p className={classes.errMsg}>{this.state.errorMessage}</p>;
+        if (this.state.loading){
+            errorMessage = <Spinner/>
+        }
+        return (
+            <div>
+                <Header/>
+                <div className={classes.login}>
+                    <h1>Login</h1>
+                    {errorMessage}
+                    <form onSubmit={this.submitForm}>
+                        <label>Matric no</label>
+                        <input type="text" name="matricNo" onChange={this.handleChange} required/>
+                        <label>Password</label>
+                        <input type="password" name="password" onChange={this.handleChange} required/>
+                        <input type="submit" value="submit" />
+                    </form>
+                    <p>Not yet a member?
+                        <span>
                         <NavLink to="/register"> Register</NavLink>
                     </span>
-                       </p>
-                   </div>
-               </div>
+                    </p>
+                </div>
+            </div>
 
-           );
-       }
+        );
     }
 }
 
