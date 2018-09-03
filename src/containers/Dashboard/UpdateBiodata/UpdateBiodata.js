@@ -22,7 +22,6 @@ class UpdateBiodata extends Component{
     //to handle real time props change
     componentWillReceiveProps(nextProps){
         if(this.props.student !== nextProps.student){
-            //console.log('component received props', nextProps.courses);
             this.setState({
                 student: nextProps.student
             });

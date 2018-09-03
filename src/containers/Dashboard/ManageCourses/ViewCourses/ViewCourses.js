@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import axios from '../../../../axios-instance';
 import classes from './ViewCourses.css';
 import { connect } from 'react-redux';
+import * as action from '../../../../store/actions/index';
 
 class ViewCourses extends Component{
     state = {
@@ -13,23 +14,27 @@ class ViewCourses extends Component{
 
 
     //to handle real time props change
-    // componentWillReceiveProps(nextProps){
-    //     if(this.props.courses !== nextProps.courses){
-    //         console.log('component received props', nextProps.courses);
-    //         this.setState({
-    //             courses: nextProps.courses
-    //         });
-    //
-    //     }
-    // }
+    componentWillReceiveProps(nextProps){
+        if(this.props.courses !== nextProps.courses){
+            console.log('component received props', nextProps.courses);
+            this.setState({
+                courses: nextProps.courses
+            });
 
-    deleteCourse = (event, theID) => {
+        }
+    }
+
+    deleteCourse = (event, theID, courseIndex) => {
         this.setState({loading: true});
         axios.delete(`${this.props.match.url}?course_id=${theID}`)
             .then(result => {
                 //set up real time data of course deletion
                 //to make up for the discrepancy in the
                 //dashboard component updation algorithm
+                console.log('course deleted', theID);
+                //show deleted course to reflect in the redux State
+                this.props.onCourseDelete(courseIndex);
+
                 this.setState({
                     successMessage: result.data.message,
                     courses: result.data.updatedCourses,
@@ -64,7 +69,7 @@ class ViewCourses extends Component{
                         <td>{course.courseCode}</td>
                         <td>{course.courseUnit}</td>
                         <td>
-                            <button onClick={(event) => deleteHandler(event, course._id)} className={classes.delete}>Delete</button>
+                            <button onClick={(event) => deleteHandler(event, course._id, index)} className={classes.delete}>Delete</button>
                         </td>
                     </tr>
                 );
@@ -114,4 +119,10 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(withRouter(ViewCourses));
+const mapDispatchToProps = dispatch => {
+    return {
+        onCourseDelete: (theIndex) => dispatch(action.deleteCourse(theIndex))
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(ViewCourses));

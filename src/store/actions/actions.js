@@ -35,3 +35,17 @@ export const updateBiodata = (biodata) => {
       newBiodata: biodata
   }
 };
+
+export const updateCourse = course => {
+    return {
+        type: actionTypes.UPDATE_COURSE,
+        newCourse: course
+    }
+};
+
+export const deleteCourse = (index) => {
+    return {
+        type: actionTypes.DELETE_COURSE,
+        theIndex: index
+    }
+};

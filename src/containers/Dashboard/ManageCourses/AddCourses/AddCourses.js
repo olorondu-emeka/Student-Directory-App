@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import axios from "../../../../axios-instance";
 import classes from './AddCourses.css';
+import { connect } from 'react-redux';
+import * as action from '../../../../store/actions/index';
 
 class AddCourses extends Component{
     state = {
         formInfo: {
             courseTitle: '',
             courseCode: '',
-            courseUnit: 0
+            courseUnit: 1
         },
         successMessage: '',
         loading: false
@@ -40,11 +42,14 @@ class AddCourses extends Component{
         var emptyForm = {
             courseTitle: '',
             courseCode: '',
-            courseUnit: 0
+            courseUnit: 1
         };
         //console.log(this.props);
         axios.post(`${this.props.match.url}`, formInfo)
             .then(result => {
+                //add course to redux state
+                this.props.onCourseAdd(result.data.addedCourse);
+
                 this.setState({ successMessage: result.data.message, formInfo: {...emptyForm}, loading: false });
                 this.props.history.push(`${this.props.match.url}`);
             })
@@ -80,4 +85,10 @@ class AddCourses extends Component{
     }
 }
 
-export default AddCourses;
+const mapDispatchToProps = dispatch => {
+    return {
+        onCourseAdd: (course) => dispatch(action.updateCourse(course))
+    }
+};
+
+export default connect(null, mapDispatchToProps)(AddCourses);

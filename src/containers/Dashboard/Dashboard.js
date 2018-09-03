@@ -23,8 +23,13 @@ class Dashboard extends Component{
 
         }
         else{
+            //redirect to the login page
             this.props.history.replace('/login');
         }
+    }
+
+    componentDidMount(){
+        this.props.updateTheStudent(`/dashboard/${this.props.match.params.id}`);
     }
 
     // componentWillReceiveProps(nextProps){
@@ -48,11 +53,6 @@ class Dashboard extends Component{
         }
     };
 
-
-
-    componentDidMount(){
-        this.props.updateTheStudent(`/dashboard/${this.props.match.params.id}`);
-    }
 
     render() {
         if (this.props.contentLoaded) {

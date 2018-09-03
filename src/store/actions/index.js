@@ -1,1 +1,1 @@
-export {updateTheStudent, updateBiodata } from './actions'
+export {updateTheStudent, updateBiodata, updateCourse, deleteCourse } from './actions'

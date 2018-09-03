@@ -1,3 +1,4 @@
 export const UPDATE_STUDENT = 'UPDATE_STUDENT';
 export const UPDATE_BIODATA = 'UPDATE_BIODATA';
-
+export const UPDATE_COURSE = 'UPDATE_COURSE';
+export const DELETE_COURSE = 'DELETE_COURSE';

@@ -31,6 +31,27 @@ const reducer = (state = initialState, action) => {
                 }
             };
 
+        case actionTypes.UPDATE_COURSE:
+            return {
+                ...state,
+                student: {
+                    ...state.student,
+                    courses: state.student.courses.concat(action.newCourse)
+
+                }
+            };
+
+        case actionTypes.DELETE_COURSE:
+            return {
+                ...state,
+                student: {
+                    ...state.student,
+                    courses: state.student.courses.filter(function(course, index){
+                        return index !== action.theIndex;
+                    })
+                }
+            };
+
         default:
             return state;
 
