@@ -51,6 +51,12 @@ const reducer = (state = initialState, action) => {
                 }
             };
 
+        case actionTypes.DELETE_ACCOUNT:
+            return {
+                student: {},
+                dashboardLoaded: false
+            };
+
         default:
             return state;
 

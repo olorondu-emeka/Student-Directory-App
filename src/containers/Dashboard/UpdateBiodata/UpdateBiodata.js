@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom';
-import classes from './UpdateBiodata.css';
-import axios from "../../../axios-instance";
 import { connect } from 'react-redux';
+
+import axios from "../../../axios-instance";
+import Spinner from '../../../components/UI/Spinner/Spinner';
+import classes from './UpdateBiodata.css';
 import * as actionType from '../../../store/actions/index';
 
 class UpdateBiodata extends Component{
@@ -77,7 +79,7 @@ class UpdateBiodata extends Component{
     render(){
         if (this.state.loading){
             return (
-                <p>Loading</p>
+               <Spinner/>
             );
         }
 
@@ -99,13 +101,13 @@ class UpdateBiodata extends Component{
                             <label>Level</label>
                             <input type="text" value={this.state.student.biodata.level} readOnly/>
                             <label>Email</label>
-                            <input type="email" name="email" defaultValue={this.state.student.biodata.email} onChange={this.handleChange}/>
+                            <input type="email" name="email" defaultValue={this.state.student.biodata.email} onChange={this.handleChange} required/>
                             <label>Phone Number</label>
-                            <input type="text" name="phoneNo" defaultValue={this.state.student.biodata.phoneNo} onChange={this.handleChange}/>
+                            <input type="text" name="phoneNo" defaultValue={this.state.student.biodata.phoneNo} onChange={this.handleChange} required/>
                             <label>DOB</label>
-                            <input type="text" name="dob" placeholder="DD/MM/YYYY" defaultValue={this.state.student.biodata.dob} onChange={this.handleChange}/>
+                            <input type="text" name="dob" placeholder="DD/MM/YYYY" defaultValue={this.state.student.biodata.dob} onChange={this.handleChange} required/>
                             <label>Address</label>
-                            <textarea name="address" rows="4" defaultValue={this.state.student.biodata.address} onChange={this.handleChange}></textarea>
+                            <textarea name="address" rows="4" defaultValue={this.state.student.biodata.address} onChange={this.handleChange} required></textarea>
                             <input type="submit" value="Update biodata" />
                         </form>
                     </div>

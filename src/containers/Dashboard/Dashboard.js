@@ -1,15 +1,20 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
+import { connect } from 'react-redux';
+import TheAxios from 'axios';
+
 import Sidebar from '../../components/UI/Sidebar/Sidebar';
 import ViewBiodata from './ViewBiodata/ViewBiodata';
 import UpdateBiodata from './UpdateBiodata/UpdateBiodata';
 import ManageCourses from './ManageCourses/ManageCourses';
 import DashboardIndex from './Dashboard_Index/Dashboard_index';
+import DeleteAccount from './DeleteAccount/DeleteAccount';
 import Logout from '../Logout/Logout';
 import classes from './Dashboard.css';
-import { connect } from 'react-redux';
-import TheAxios from "axios";
+
 import  * as  theAction from '../../store/actions/index';
+import Spinner from '../../components/UI/Spinner/Spinner';
+
 
 
 class Dashboard extends Component{
@@ -71,6 +76,7 @@ class Dashboard extends Component{
                                 <Route path={this.props.match.url + "/update-biodata"} component={UpdateBiodata } />
                                 <Route path={this.props.match.url + "/manage-courses"} component={ManageCourses} />
                                 <Route path={this.props.match.url + "/logout"} component={Logout} />
+                                <Route path={this.props.match.url + "/delete-account"} component={DeleteAccount} />
                                 <Route path={this.props.match.url} component={DashboardIndex} />
                             </Switch>
                         </div>
@@ -81,7 +87,7 @@ class Dashboard extends Component{
 
         else{
             return(
-                <p>Loading</p>
+                <Spinner/>
             );
         }
     }

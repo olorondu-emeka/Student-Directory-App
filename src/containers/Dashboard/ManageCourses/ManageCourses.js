@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { NavLink, Route } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 import AddCourses from './AddCourses/AddCourses';
 import ViewCourses from './ViewCourses/ViewCourses';
 import classes from './ManageCourses.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 
 class ManageCourses extends Component{
 

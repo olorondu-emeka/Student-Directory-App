@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import Header from '../../components/UI/Header/Header';
 import theImage from '../../images/students2.png';
 import classes from './Home.css';

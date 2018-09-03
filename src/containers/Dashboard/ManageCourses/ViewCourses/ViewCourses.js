@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+
 import axios from '../../../../axios-instance';
 import classes from './ViewCourses.css';
-import { connect } from 'react-redux';
+
 import * as action from '../../../../store/actions/index';
+import Spinner from '../../../../components/UI/Spinner/Spinner';
 
 class ViewCourses extends Component{
     state = {
@@ -78,7 +81,7 @@ class ViewCourses extends Component{
         //components to be rendered
         if (this.state.loading) {
             return (
-                <p>Loading...</p>
+                <Spinner/>
             );
         }
         else{

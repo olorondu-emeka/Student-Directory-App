@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+import { NavLink } from "react-router-dom";
+import TheAxios from 'axios';
+
 import classes from './Login.css';
 import axios from "../../axios-instance";
-import TheAxios from 'axios';
-import { NavLink } from "react-router-dom";
 import Header from '../../components/UI/Header/Header';
-
+import Spinner from '../../components/UI/Spinner/Spinner';
 
 class Login extends Component{
     state = {
@@ -12,7 +13,8 @@ class Login extends Component{
             matricNo: '',
             password: ''
         },
-        errorMessage: ''
+        errorMessage: '',
+        loading: false
     };
 
     handleChange = (event) => {
@@ -41,6 +43,10 @@ class Login extends Component{
 
     submitForm = (event) => {
         event.preventDefault();
+
+        //display spineer while attempting to log in
+        this.setState({loading: true});
+
         var formInfo = this.state.formInfo;
         axios.post('/login', formInfo)
             .then(result => {
@@ -52,12 +58,15 @@ class Login extends Component{
                     //store token in local storage
                     window.localStorage.setItem('token', result.data.token);
 
+                    //stop the spinner from displaying
+                    this.setState({loading: false});
+
                     //redirect to dashboard
                     this.props.history.replace(`/dashboard`);
                     console.log(result.data, "redirected to dashboard");
                 }
                 else{
-                    this.setState({ errorMessage: result.data.message });
+                    this.setState({ errorMessage: result.data.message, loading: false });
                     this.props.history.replace('/login');
                     console.log(result.data, 'redirected to login');
                 }
@@ -68,28 +77,33 @@ class Login extends Component{
     };
 
     render(){
-        return (
-            <div>
-                <Header/>
-                <div className={classes.login}>
-                    <h1>Login</h1>
-                    <p className={classes.errMsg}>{this.state.errorMessage}</p>
-                    <form onSubmit={this.submitForm}>
-                        <label>Matric no</label>
-                        <input type="text" name="matricNo" onChange={this.handleChange}/>
-                        <label>Password</label>
-                        <input type="password" name="password" onChange={this.handleChange}/>
-                        <input type="submit" value="submit" />
-                    </form>
-                    <p>Not yet a member?
-                        <span>
+       if (this.state.loading){
+           return <Spinner/>
+       }
+       else{
+           return (
+               <div>
+                   <Header/>
+                   <div className={classes.login}>
+                       <h1>Login</h1>
+                       <p className={classes.errMsg}>{this.state.errorMessage}</p>
+                       <form onSubmit={this.submitForm}>
+                           <label>Matric no</label>
+                           <input type="text" name="matricNo" onChange={this.handleChange} required/>
+                           <label>Password</label>
+                           <input type="password" name="password" onChange={this.handleChange} required/>
+                           <input type="submit" value="submit" />
+                       </form>
+                       <p>Not yet a member?
+                           <span>
                         <NavLink to="/register"> Register</NavLink>
                     </span>
-                    </p>
-                </div>
-            </div>
+                       </p>
+                   </div>
+               </div>
 
-        );
+           );
+       }
     }
 }
 

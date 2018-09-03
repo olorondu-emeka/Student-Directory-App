@@ -1,7 +1,9 @@
 import React from 'react';
 import { NavLink, withRouter } from 'react-router-dom';
-import classes from './Sidebar.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+import classes from './Sidebar.css';
+
 
 const sidebar = (props) => {
     var theUrl = props.match.url;

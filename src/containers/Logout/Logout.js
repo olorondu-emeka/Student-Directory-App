@@ -7,12 +7,18 @@ const logout = (props) => {
         window.localStorage.removeItem('token');
         props.history.replace('/login');
     };
+
+    const cancelLogoutHandler = () => {
+        props.history.replace('/dashboard');
+    };
+
+
     return (
         <div className={classes.logout}>
             <p>Are you sure you want to logout?</p>
             <div>
                 <button onClick={logoutHandler}>Yes</button>
-                <button>No</button>
+                <button onClick={cancelLogoutHandler}>No</button>
             </div>
         </div>
     );

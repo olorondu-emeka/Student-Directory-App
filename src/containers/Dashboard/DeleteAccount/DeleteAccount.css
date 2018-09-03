@@ -1,13 +1,13 @@
-.logout{
+.deleteAccount{
     width: 80%;
     margin: 100px auto 0px;
 }
 
-.logout div{
+.deleteAccount div{
     margin-top: 30px;
 }
 
-.logout button{
+.deleteAccount button{
     padding: 10px 5px;
     width: 10%;
     border: none;
@@ -17,7 +17,7 @@
     color: #fff;
 }
 
-.logout button:first-child{
+.deleteAccount button:first-child{
     margin-right: 20px;
     background: green;
 

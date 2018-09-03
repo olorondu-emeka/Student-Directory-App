@@ -42,3 +42,9 @@ export const deleteCourse = (index) => {
         theIndex: index
     }
 };
+
+export const deleteAccount = () => {
+  return {
+      type: actionTypes.DELETE_ACCOUNT
+  }
+};

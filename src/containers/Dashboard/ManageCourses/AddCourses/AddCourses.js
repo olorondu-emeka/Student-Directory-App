@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
 import axios from "../../../../axios-instance";
 import classes from './AddCourses.css';
-import { connect } from 'react-redux';
 import * as action from '../../../../store/actions/index';
+import Spinner from '../../../../components/UI/Spinner/Spinner';
 
 
 class AddCourses extends Component{
@@ -58,7 +60,7 @@ class AddCourses extends Component{
 
     render(){
         if (this.state.loading){
-            return <p>Loading</p>;
+            return <Spinner/>;
         }
         else{
             return (
@@ -68,11 +70,11 @@ class AddCourses extends Component{
                         <h1>Add courses</h1>
                         <form onSubmit={this.submitForm}>
                             <label>Course Title</label>
-                            <input type="text" name="courseTitle" value={this.state.formInfo.courseTitle} onChange={this.handleChange}/>
+                            <input type="text" name="courseTitle" value={this.state.formInfo.courseTitle} onChange={this.handleChange} required/>
                             <label>Course Code</label>
-                            <input type="text" name="courseCode" value={this.state.formInfo.courseCode} onChange={this.handleChange}/>
+                            <input type="text" name="courseCode" value={this.state.formInfo.courseCode} onChange={this.handleChange} required/>
                             <label>Course Unit</label>
-                            <input type="number" name="courseUnit" value={this.state.formInfo.courseUnit} min="1" max="10" onChange={this.handleChange}/>
+                            <input type="number" name="courseUnit" value={this.state.formInfo.courseUnit} min="1" max="10" onChange={this.handleChange} required/>
                             <input type="submit" value="Add Course"/>
                         </form>
                     </div>

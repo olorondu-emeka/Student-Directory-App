@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { faHome, faUser, faUserEdit, faClipboardList, faTrash, faSignOutAlt, faPlus, faEye } from '@fortawesome/free-solid-svg-icons';
+import { library } from '@fortawesome/fontawesome-svg-core';
+
 import Home from './containers/Home/Home';
 import Register from './containers/Register/Register';
 import Login from './containers/Login/Login';
 import Dashboard from './containers/Dashboard/Dashboard';
 import classes from './App.css';
-import { faHome, faUser, faUserEdit, faClipboardList, faTrash, faSignOutAlt, faPlus, faEye } from '@fortawesome/free-solid-svg-icons';
-import { library } from '@fortawesome/fontawesome-svg-core';
+
 
 library.add(faHome, faUser, faUserEdit, faClipboardList, faTrash, faSignOutAlt, faPlus, faEye);
 

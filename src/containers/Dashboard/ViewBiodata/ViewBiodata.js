@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import classes from './ViewBiodata.css';
 import { connect } from 'react-redux';
-
+import classes from './ViewBiodata.css';
 
 class ViewBiodata extends Component {
 
