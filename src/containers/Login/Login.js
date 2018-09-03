@@ -49,11 +49,11 @@ class Login extends Component{
                     //get token value from result.data.token store and store it in the axios header
                     this.getToken(result.data.token);
 
-                    //store in local storage
+                    //store token in local storage
                     window.localStorage.setItem('token', result.data.token);
 
                     //redirect to dashboard
-                    this.props.history.replace(`/dashboard/${result.data.user._id}`);
+                    this.props.history.replace(`/dashboard`);
                     console.log(result.data, "redirected to dashboard");
                 }
                 else{

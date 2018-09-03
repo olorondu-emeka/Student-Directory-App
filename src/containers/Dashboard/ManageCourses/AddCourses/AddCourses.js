@@ -4,6 +4,7 @@ import classes from './AddCourses.css';
 import { connect } from 'react-redux';
 import * as action from '../../../../store/actions/index';
 
+
 class AddCourses extends Component{
     state = {
         formInfo: {
@@ -15,9 +16,6 @@ class AddCourses extends Component{
         loading: false
     };
 
-    componentDidMount(){
-        console.log('add course component mounted');
-    }
 
     componentDidUpdate(){
         console.log('add course component updated');
@@ -45,7 +43,7 @@ class AddCourses extends Component{
             courseUnit: 1
         };
         //console.log(this.props);
-        axios.post(`${this.props.match.url}`, formInfo)
+        axios.post(`${this.props.match.url}/${this.props.theID}`, formInfo)
             .then(result => {
                 //add course to redux state
                 this.props.onCourseAdd(result.data.addedCourse);
@@ -85,10 +83,15 @@ class AddCourses extends Component{
     }
 }
 
+const mapStateToProps = state => {
+   return {
+       theID: state.student._id
+   }
+};
 const mapDispatchToProps = dispatch => {
     return {
         onCourseAdd: (course) => dispatch(action.updateCourse(course))
     }
 };
 
-export default connect(null, mapDispatchToProps)(AddCourses);
+export default connect(mapStateToProps, mapDispatchToProps)(AddCourses);

@@ -12,7 +12,7 @@ class ViewCourses extends Component{
         loading: false
     };
 
-
+    //set up local copy of the redux state
     //to handle real time props change
     componentWillReceiveProps(nextProps){
         if(this.props.courses !== nextProps.courses){
@@ -26,12 +26,9 @@ class ViewCourses extends Component{
 
     deleteCourse = (event, theID, courseIndex) => {
         this.setState({loading: true});
-        axios.delete(`${this.props.match.url}?course_id=${theID}`)
+        axios.delete(`${this.props.match.url}/${this.props.studentID}?course_id=${theID}`)
             .then(result => {
-                //set up real time data of course deletion
-                //to make up for the discrepancy in the
-                //dashboard component updation algorithm
-                console.log('course deleted', theID);
+
                 //show deleted course to reflect in the redux State
                 this.props.onCourseDelete(courseIndex);
 
@@ -40,6 +37,8 @@ class ViewCourses extends Component{
                     courses: result.data.updatedCourses,
                     loading: false
                 });
+
+                //redirect to the same page
                 this.props.history.push(`${this.props.match.url}`);
 
             })
@@ -115,7 +114,8 @@ class ViewCourses extends Component{
 
 const mapStateToProps = state => {
   return {
-      courses: state.student.courses
+      courses: state.student.courses,
+      studentID: state.student._id
   };
 };
 

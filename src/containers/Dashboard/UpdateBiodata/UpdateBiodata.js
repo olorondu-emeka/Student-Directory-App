@@ -41,7 +41,6 @@ class UpdateBiodata extends Component{
 
     handleChange = (event) => {
 
-        //console.log(theForm);
         var theFormInfo = {
             ...this.state.formInfo,
             [event.target.name]: event.target.value
@@ -58,12 +57,14 @@ class UpdateBiodata extends Component{
         //afterwards, set spinner to false to remove spinner
         this.setState({loading: true});
         var formInfo = this.state.formInfo;
-        //console.log(this.props);
-        axios.patch(`${this.props.match.url}`, formInfo)
+
+        axios.patch(`${this.props.match.url}/${this.props.studentID}`, formInfo)
             .then(result => {
+
+                //send the updated info to the redux store
                 this.props.onBiodataUpdate(formInfo);
+
                 this.setState({ successMessage: result.data.message, loading: false });
-                console.log(this.props.match, result.data);
 
                 this.props.history.push(`${this.props.match.url}`);
             })
@@ -71,16 +72,6 @@ class UpdateBiodata extends Component{
                 console.log(err);
             });
     };
-
-    // componentDidMount(){
-    //     axios.get(`${this.props.match.url}`)
-    //         .then(result => {
-    //             this.setState({ student: result.data.student, contentLoaded: true });
-    //         })
-    //         .catch(err =>{
-    //             console.log(err);
-    //         });
-    // }
 
 
     render(){
@@ -128,7 +119,8 @@ class UpdateBiodata extends Component{
 
 const mapStateToProps = state => {
     return {
-        student: state.student
+        student: state.student,
+        studentID: state.student._id
     };
 };
 

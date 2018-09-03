@@ -10,13 +10,6 @@ export const updateStudent = (theStudent) => {
     }
 };
 
-// export const updateActionMiddleware = (theStudent) => {
-//     return dispatch => {
-//         dispatch(updateStudent(theStudent));
-//     }
-// };
-
-
 export const updateTheStudent = (route) => {
     return dispatch => {
         axios.get(route)

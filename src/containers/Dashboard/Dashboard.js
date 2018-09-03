@@ -17,9 +17,9 @@ class Dashboard extends Component{
     componentWillMount(){
         const theToken = window.localStorage.getItem('token');
         if (theToken !== null){
-            //set header
+
+            //set token in header
            this.getToken(theToken);
-            //this.props.updateTheStudent(`/dashboard/${this.props.match.params.id}`);
 
         }
         else{
@@ -28,15 +28,10 @@ class Dashboard extends Component{
         }
     }
 
+    // make an axios get request in the reducer middleware
     componentDidMount(){
-        this.props.updateTheStudent(`/dashboard/${this.props.match.params.id}`);
+        this.props.updateTheStudent(`/dashboard`);
     }
-
-    // componentWillReceiveProps(nextProps){
-    //     if (this.props.student !== nextProps.student){
-    //         this.setState({student: nextProps.student});
-    //     }
-    // }
 
 
     getToken  (token) {

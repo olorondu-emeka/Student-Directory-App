@@ -2,7 +2,6 @@ import * as actionTypes from './actions/actionTypes';
 
 const initialState = {
     student: {},
-    token: 'yes',
     dashboardLoaded: false
 };
 
