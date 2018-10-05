@@ -105,7 +105,7 @@ class UpdateBiodata extends Component{
                             <label>Phone Number</label>
                             <input type="text" name="phoneNo" defaultValue={this.state.student.biodata.phoneNo} onChange={this.handleChange} required/>
                             <label>DOB</label>
-                            <input type="text" name="dob" placeholder="DD/MM/YYYY" defaultValue={this.state.student.biodata.dob} onChange={this.handleChange} required/>
+                            <input type="date" name="dob" placeholder="DD/MM/YYYY" defaultValue={this.state.student.biodata.dob} onChange={this.handleChange} required/>
                             <label>Address</label>
                             <textarea name="address" rows="4" defaultValue={this.state.student.biodata.address} onChange={this.handleChange} required></textarea>
                             <input type="submit" value="Update biodata" />
