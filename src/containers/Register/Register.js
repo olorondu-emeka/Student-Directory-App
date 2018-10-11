@@ -37,9 +37,12 @@ class Register extends Component{
         axios.post('/register', formInfo)
             .then(result => {
                 this.setState({loading: false});
-                console.log(result.data);
-                console.log(formInfo);
-                this.props.history.push('/');
+
+                // set the token in local storage
+                window.localStorage.setItem('token', result.data.token);
+
+                //redirect to dashboard
+                this.props.history.push('/dashboard');
             })
             .catch(err => {
                 console.log(err);
