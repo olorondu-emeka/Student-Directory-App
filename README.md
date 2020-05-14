@@ -18,7 +18,7 @@ System requirements for this project to work includes:
 * MongoDB (v4 or higher)
 
 ### Installation
-To install the dependencies in the ***package.json file***, run the following command:  
+To install the dependencies in the ***package.json*** file, run the following command:  
 
 ```bash
 npm install
