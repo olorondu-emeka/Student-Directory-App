@@ -18,7 +18,7 @@ System requirements for this project to work includes:
 * MongoDB (v4 or higher)
 
 ### Installation
-To install the dependencies in the ***package.json*** file, run the following command:  
+To install the dependencies in the ***package.json*** file, run the following command in the terminal:  
 
 ```bash
 npm install
@@ -29,7 +29,7 @@ To run the project on your local machine:
 * Ensure that the [Student-Directory-API](https://github.com/olorondu-emeka/Student-Directory-API) project is running on your machine
 * Change the **baseURL** property in the ***axios-instance.js*** file contained in the **src** folder to [http://localhost:5000/api/student]().  
 
-* In the project directory, run the follwing command in the terminal:
+* In the project directory, run the following command in the terminal:
 
  ```bash
  npm start
