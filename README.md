@@ -25,13 +25,17 @@ npm install
 ```
 
 ### Running the project
-To run the project on your local machine, first change the **baseURL** property in the ***axios-instance.js*** file contained in the **src** folder to [http://localhost:5000/api/student](). Once this has been done, in the project directory, you can run:
+To run the project on your local machine:
+* Ensure that the [Student-Directory-API](https://github.com/olorondu-emeka/Student-Directory-API) project is running on your machine
+* Change the **baseURL** property in the ***axios-instance.js*** file contained in the **src** folder to [http://localhost:5000/api/student]().  
+
+* In the project directory, run the follwing command in the terminal:
 
  ```bash
  npm start
  ```
 
-Runs the app in the development mode.<br>
+This runs the app in the development mode.<br>
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.<br>
